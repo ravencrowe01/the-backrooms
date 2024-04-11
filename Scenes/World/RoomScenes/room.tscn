@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca1jx67tleivq"]
+
+[ext_resource type="Script" path="res://Scripts/World/Room.cs" id="1_4tthe"]
+[ext_resource type="PackedScene" uid="uid://7ywp2nrlriqb" path="res://Scenes/World/RoomScenes/floor.tscn" id="1_b8jpq"]
+[ext_resource type="PackedScene" uid="uid://ditiu6np0m342" path="res://Scenes/World/RoomScenes/wall.tscn" id="2_30bxp"]
+[ext_resource type="PackedScene" uid="uid://bljlaxslinphv" path="res://Scenes/World/RoomScenes/corner.tscn" id="4_cu1ai"]
+[ext_resource type="Script" path="res://Scripts/World/RoomStructure.cs" id="4_og5wi"]
+
+[node name="Room" type="Node3D" node_paths=PackedStringArray("_walls", "_corners")]
+script = ExtResource("1_4tthe")
+_walls = []
+_corners = []
+
+[node name="Floor" parent="." instance=ExtResource("1_b8jpq")]
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="North" parent="Walls" instance=ExtResource("2_30bxp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 0
+StartState = false
+
+[node name="South" parent="Walls" instance=ExtResource("2_30bxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 1
+StartState = false
+
+[node name="East" parent="Walls" instance=ExtResource("2_30bxp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 4)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 2
+StartState = false
+
+[node name="West" parent="Walls" instance=ExtResource("2_30bxp")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -4)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 3
+StartState = false
+
+[node name="Corners" type="Node3D" parent="."]
+
+[node name="NorthEast" parent="Corners" instance=ExtResource("4_cu1ai")]
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 4
+StartState = false
+
+[node name="NorthWest" parent="Corners" instance=ExtResource("4_cu1ai")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 5
+StartState = false
+
+[node name="SouthEast" parent="Corners" instance=ExtResource("4_cu1ai")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 6
+StartState = false
+
+[node name="SouthWest" parent="Corners" instance=ExtResource("4_cu1ai")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+script = ExtResource("4_og5wi")
+Direction = 7
+StartState = false
