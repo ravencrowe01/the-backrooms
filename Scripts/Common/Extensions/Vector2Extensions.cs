@@ -9,9 +9,7 @@ public static class Vector2Extensions {
     public static int IntY (this Vector2 vec) => (int) vec.Y;
 
     public static Direction GetDirectionRelativeTo (this Vector2 position, Vector2 relative) {
-        Direction dir;
-
-        var dif = position - relative;
+        Direction dir = Direction.North;
 
         return dir;
     }

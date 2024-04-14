@@ -1,3 +1,5 @@
+using Godot;
+
 namespace Backrooms.Common;
 
 public static class DirectionExtension {
@@ -13,7 +15,7 @@ public static class DirectionExtension {
         _ => throw new System.NotImplementedException ($"Direction {direction} does not exist."),
     };
 
-    public static Direction ToVector2 (this Direction direction) => direction switch {
+    public static Vector2 ToVector2 (this Direction direction) => direction switch {
       Direction.North => new Vector2 (1, 0),
       Direction.South => new Vector2 (-1, 0),
       Direction.East => new Vector2 (0, 1),

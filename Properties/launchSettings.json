@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Backrooms": {
+      "commandName": "Project"
+    },
+    "Start in Godot": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Development\\Engines\\godot\\Windows\\Godot_v4.2.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path . --verbose",
+      "workingDirectory": "."
+    }
+  }
+}

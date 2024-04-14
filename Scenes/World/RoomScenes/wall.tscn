@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ditiu6np0m342"]
 
-[ext_resource type="Script" path="res://scripts/world/RoomStructure.cs" id="1_2d8ay"]
+[ext_resource type="Script" path="res://Scripts/World/RoomStructure.cs" id="1_ua56j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ynj4"]
 size = Vector3(0.25, 2, 8)
@@ -8,7 +8,7 @@ size = Vector3(0.25, 2, 8)
 [sub_resource type="BoxMesh" id="BoxMesh_35cnf"]
 
 [node name="Wall" type="Node3D"]
-script = ExtResource("1_2d8ay")
+script = ExtResource("1_ua56j")
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 1, 0)

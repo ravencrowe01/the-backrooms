@@ -1,7 +1,4 @@
-﻿using Backrooms.Common;
-using Backrooms.scripts.Common;
-using Backrooms.World.Generation;
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 
 namespace Backrooms.World;
@@ -17,7 +14,7 @@ public partial class Level : Node3D {
     private bool _isWorldSetup = false;
 
     public override void _Ready () {
-        
+
     }
 
     public void SetupWorld () {
@@ -26,7 +23,7 @@ public partial class Level : Node3D {
         }
     }
 
-    public void GenerateChunk(Vector2 cords) {
+    public void GenerateChunk (Vector2 cords) {
 
     }
 }

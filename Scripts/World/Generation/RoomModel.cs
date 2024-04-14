@@ -1,8 +1,9 @@
+using Godot;
+
 namespace Backrooms.World.Generation;
 
 public class RoomModel {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public Vector2 Coordinates { get; }
 
     public bool NorthWall { get; set; }
     public bool SouthWall { get; set; }
@@ -14,10 +15,21 @@ public class RoomModel {
     public bool SoutEastCorner { get; set; }
     public bool SouthWestCorner { get; set; }
 
+    public RoomModel (Vector2 cords) {
+        Coordinates = cords;
+    }
+
     public void SetWalls (bool north = false, bool south = false, bool east = false, bool west = false) {
         NorthWall = north;
         SouthWall = south;
         EastWall = east;
         WestWall = west;
+    }
+
+    public void SetCorners (bool northEast, bool northWest, bool southEast, bool southWest) {
+        NorthEastCorner = northEast;
+        NorthWestCorner = northWest;
+        SoutEastCorner = southEast;
+        SouthWestCorner = southWest;
     }
 }

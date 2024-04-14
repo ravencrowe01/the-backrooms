@@ -1,29 +1,43 @@
-using System.Collections.Generic;
-using Backrooms.World;
+using Backrooms.Common.RNG;
+using Backrooms.World.Generation;
 using Godot;
 
 namespace Backrooms.Managers;
 
-public partial class WorldManager : Node {
-    private Dictionary<Vector2, Chunk> _chunks = new Dictionary<Vector2, Chunk>();
-
+internal partial class WorldManager : Node {
     [Export]
-    private PackedScene _roomBase;
+    private ChunkManager _chunkManager;
 
-    public PackedScene Roombase => _roomBase;
+    public IChunkGenerator StartingChunkGenerator { 
+        private get {
+            return default;
+        }
+        set {
+            _chunkManager.StartingChunkGenerator = value;
+        }
+    }
 
-    [Export]
-    private PackedScene _chunkBase;
+    public ulong Seed { private get; set; }
 
-    public PackedScene Chunkbase => _chunkBase;
-
-    [Export]
-    private Vector2 _chunkDimensions;
-
-    [Export]
-    private Vector2 _roomDimensions;
+    public override void _Ready () {
+        _chunkManager.StartingChunkGenerator = StartingChunkGenerator;
+    }
 
     public void GenerateStartingChunks () {
-        
+        _chunkManager.GenerateStartingChunk (new RNGProvider (Seed));
+    }
+
+    private class RNGProvider : IRNGProvider {
+        private RandomNumberGenerator rng;
+
+        public RNGProvider(ulong seed) {
+            rng = new RandomNumberGenerator {
+                Seed = seed
+            };
+        }
+
+        public int Next (int max) => rng.RandiRange (0, max);
+
+        public void SetSeed (ulong seed) => rng.Seed = seed;
     }
 }

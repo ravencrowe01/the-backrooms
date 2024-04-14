@@ -1,9 +1,8 @@
+using Backrooms.World.Generation;
+using System.Collections.Generic;
+
 namespace Backrooms.Managers;
 
-public class MazeGenerationManager {
-    private IEnumerable<IMazeGenerator> generators = new List<IMazeGenerator> ();
-}
-
-public interface IMazeGenerator {
-    
+internal class MazeGenerationManager {
+    private IEnumerable<IChunkGenerator> _generators = new List<IChunkGenerator> ();
 }

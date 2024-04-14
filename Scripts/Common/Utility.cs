@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace Backrooms.World.Generation;
+namespace Backrooms.Common;
 
-public class WorldGenerator {
-    private int GenerateSeed (int seed, int x, int y) => seed ^ ShiftLeftWithWrap (x, 8) ^ ShiftRightWithWrap (y, 8);
-
-    private int ShiftRightWithWrap (int num, int bits) {
+public static class Utility {
+    public static int ShiftRightWithWrap (int num, int bits) {
         if (bits <= 0) {
             return num;
         }
@@ -23,7 +21,7 @@ public class WorldGenerator {
         return num;
     }
 
-    private int ShiftLeftWithWrap (int num, int bits) {
+    public static int ShiftLeftWithWrap (int num, int bits) {
         if (bits <= 0) {
             return num;
         }
