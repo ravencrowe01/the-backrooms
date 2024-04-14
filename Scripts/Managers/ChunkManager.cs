@@ -31,7 +31,6 @@ internal partial class ChunkManager : Node {
 
         var model = StartingChunkGenerator.GenerateChunk (cords, _chunkDimensions, rng);
 
-        //var chunk = GD.Load<PackedScene> (@"res://Scenes/World/chunk.tscn").Instantiate<Chunk> ();
         var chunk = _chunkBase.Instantiate<Chunk> ();
 
         chunk.SetupChunk (model, cords, _roomBase);
