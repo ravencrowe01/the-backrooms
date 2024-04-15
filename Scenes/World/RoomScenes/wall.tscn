@@ -9,6 +9,7 @@ size = Vector3(0.25, 2, 8)
 
 [node name="Wall" type="Node3D"]
 script = ExtResource("1_ua56j")
+StartState = true
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 1, 0)

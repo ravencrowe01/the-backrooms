@@ -9,6 +9,7 @@ size = Vector3(0.25, 2, 0.25)
 
 [node name="Corner" type="Node3D"]
 script = ExtResource("1_aewac")
+StartState = true
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.875, 1, 3.875)

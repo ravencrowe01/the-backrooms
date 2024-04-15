@@ -1,4 +1,5 @@
 using Backrooms.Common.RNG;
+using Backrooms.Scripts.World.Generation.Generators;
 using Backrooms.World.Generation;
 using Godot;
 
@@ -13,7 +14,7 @@ internal partial class GameManager : Node {
         _worldManager = _worldManagerBase.Instantiate<WorldManager> ();
         AddChild (_worldManager);
 
-        _worldManager.StartingChunkGenerator = new TestChunkGenerator ();
+        _worldManager.StartingChunkGenerator = new BacktrackingAlgorithim();
         _worldManager.GenerateStartingChunks ();
     }
 
@@ -21,15 +22,15 @@ internal partial class GameManager : Node {
         public ChunkModel GenerateChunk (Vector2 cords, Vector2 dimensions, IRNGProvider rng) {
             var model = new ChunkModel (cords, dimensions);
 
-            for(int x = 0; x < dimensions.X; x++) {
-                for(int y = 0; y < dimensions.Y; y++) {
-                    var c = new Vector2 (x, y);
+            for(int y = 0; y < dimensions.X; y++) {
+                for(int x = 0; x < dimensions.Y; x++) {
+                    var c = new Vector2 (y, x);
 
                     model [c] = new RoomModel (c) {
-                        NorthWall = rng.Next (1) == 1,
-                        SouthWall = rng.Next (1) == 1,
-                        EastWall = rng.Next (1) == 1,
-                        WestWall = rng.Next (1) == 1
+                        NorthWall = false,
+                        SouthWall = false,
+                        EastWall = false,
+                        WestWall = false
                     };
                 }
             }

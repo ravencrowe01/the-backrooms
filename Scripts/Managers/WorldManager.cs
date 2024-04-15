@@ -23,9 +23,7 @@ internal partial class WorldManager : Node {
         _chunkManager.StartingChunkGenerator = StartingChunkGenerator;
     }
 
-    public void GenerateStartingChunks () {
-        _chunkManager.GenerateStartingChunk (new RNGProvider (Seed));
-    }
+    public void GenerateStartingChunks () => _chunkManager.GenerateStartingChunk (new RNGProvider (Seed));
 
     private class RNGProvider : IRNGProvider {
         private RandomNumberGenerator rng;

@@ -23,3 +23,7 @@ project/assembly_name="Backrooms"
 
 import/blender/enabled=false
 import/fbx/enabled=false
+
+[rendering]
+
+occlusion_culling/use_occlusion_culling=true

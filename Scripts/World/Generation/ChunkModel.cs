@@ -10,6 +10,8 @@ public class ChunkModel {
 
     private Dictionary<Vector2, RoomModel> _rooms = new Dictionary<Vector2, RoomModel> ();
 
+    public int Count => _rooms.Keys.Count;
+
     public ChunkModel (Vector2 cords, Vector2 dims) {
         Coordinates = cords;
         Dimensions = dims;
@@ -35,10 +37,10 @@ public class ChunkModel {
         }
     }
 
-    public IEnumerable<RoomModel> Neighbors (Vector2 of) {
+    public IEnumerable<RoomModel> NeighborsOf (Vector2 of, NeighborSearchFlags flags) {
         var neighbors = new List<RoomModel> ();
 
-        var cords = WorldUtility.GetNeighbors (of, _rooms.Keys);
+        var cords = WorldUtility.GetNeighborsOf (of, _rooms.Keys, flags: flags);
 
         foreach (var cord in cords) {
             neighbors.Add (_rooms [cord]);

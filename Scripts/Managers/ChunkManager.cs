@@ -23,9 +23,6 @@ internal partial class ChunkManager : Node {
 
     public IChunkGenerator StartingChunkGenerator { private get; set; }
 
-    public override void _Ready () {
-    }
-
     public void GenerateStartingChunk (IRNGProvider rng) {
         var cords = new Vector2 (0, 0);
 
@@ -35,8 +32,12 @@ internal partial class ChunkManager : Node {
 
         chunk.SetupChunk (model, cords, _roomBase);
 
+        chunk.Position += CalculateChunkOffset ();
+
         AddChild (chunk);
 
         _chunks.Add (cords, chunk);
     }
+
+    private Vector3 CalculateChunkOffset () => -new Vector3 ((_chunkDimensions.X / 2 * _roomDimensions.X) - (_roomDimensions.X / 2), 0, (_chunkDimensions.Y / 2* _roomDimensions.Y) - (_roomDimensions.Y / 2));
 }
