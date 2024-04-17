@@ -5,39 +5,43 @@ using System.Linq;
 namespace Backrooms.World;
 
 public static class WorldUtility {
-    public static IEnumerable<Vector2> GetNeighborsOf (Vector2 of, IEnumerable<Vector2> map, float range = 1, NeighborSearchFlags flags = 0) {
-        var neighbors = map.Where (current => Filter (of, range, flags, current));
+    public static IEnumerable<Vector2> FindNeighbors (Vector2 of, Vector2 dimensions, int range = 1, NeighborSearchFlags flags = NeighborSearchFlags.None) {
+        var found = new List<Vector2> ();
 
-        var list = neighbors.ToList ();
+        for (int y = -range; y <= range; y++) {
+            for (int x = -range; x <= range; x++) {
+                var current = of - new Vector2 (x, y);
 
-        return list;
-    }
-
-    private static bool Filter (Vector2 of, float range, NeighborSearchFlags flags, Vector2 current) {
-        if (current == of) {
-            return false;
+                if (!ShouldFilter (current, of, dimensions, flags)) {
+                    found.Add (current);
+                }
+            }
         }
 
-        var max = of.DistanceTo (new Vector2 (of.X + range, of.Y + range));
+        return found;
+    }
 
-        var dis = current.DistanceTo (of);
+    private static bool ShouldFilter (Vector2 current, Vector2 relative, Vector2 dimensions, NeighborSearchFlags flags) {
+        if (current == relative) {
+            return true;
+        }
 
-        if (dis > max) {
-            return false;
+        if (current.X < 0 || current.X >= dimensions.X || current.Y < 0 || current.Y >= dimensions.Y) {
+            return true;
         }
 
         if (flags.HasFlag (NeighborSearchFlags.SameAxisOnly)) {
-            if (!(current.X == of.X || current.Y == of.Y)) {
-                return false;
+            if (!(current.X == relative.X || current.Y == relative.Y)) {
+                return true;
             }
         }
 
         if (flags.HasFlag (NeighborSearchFlags.NotOnSameAxis)) {
-            if (current.X == of.X || current.Y == of.Y) {
-                return false;
+            if (current.X == relative.X || current.Y == relative.Y) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
