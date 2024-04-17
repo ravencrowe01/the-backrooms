@@ -15,6 +15,7 @@ public class ChunkModel {
     public ChunkModel (Vector2 cords, Vector2 dims) {
         Coordinates = cords;
         Dimensions = dims;
+
         SetupRooms ();
     }
 
@@ -37,10 +38,10 @@ public class ChunkModel {
         }
     }
 
-    public IEnumerable<RoomModel> NeighborsOf (Vector2 of, NeighborSearchFlags flags) {
+    public IEnumerable<RoomModel> FindNeighbors (Vector2 of, NeighborSearchFlags flags) {
         var neighbors = new List<RoomModel> ();
 
-        var cords = WorldUtility.GetNeighborsOf (of, _rooms.Keys, flags: flags);
+        var cords = WorldUtility.FindNeighbors (of, Dimensions, flags: flags);
 
         foreach (var cord in cords) {
             neighbors.Add (_rooms [cord]);

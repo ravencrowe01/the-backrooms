@@ -57,7 +57,7 @@ public partial class Room : Node3D {
     public void SetCorners (Dictionary<Direction, bool> corners) {
         foreach (var dir in corners.Keys) {
             if (dir > Direction.West) {
-                FindCorner( dir).SetState (corners [dir]);
+                FindCorner (dir).SetState (corners [dir]);
             }
         }
     }

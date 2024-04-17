@@ -21,7 +21,7 @@ public class BacktrackingAlgorithim : IChunkGenerator {
         var start = new VisitedRoom {
             Room = model [startVec],
             Previous = null,
-            UnvisitedNeighbors = model.NeighborsOf (startVec, NeighborSearchFlags.SameAxisOnly).ToList ()
+            UnvisitedNeighbors = model.FindNeighbors (startVec, NeighborSearchFlags.SameAxisOnly).ToList ()
         };
 
         visited.Add (start);
@@ -74,7 +74,7 @@ public class BacktrackingAlgorithim : IChunkGenerator {
         return new VisitedRoom {
             Room = nextRoom,
             Previous = current,
-            UnvisitedNeighbors = model.NeighborsOf (nextRoom.Coordinates, NeighborSearchFlags.SameAxisOnly).ToList ()
+            UnvisitedNeighbors = model.FindNeighbors (nextRoom.Coordinates, NeighborSearchFlags.SameAxisOnly).ToList ()
         };
     }
 
