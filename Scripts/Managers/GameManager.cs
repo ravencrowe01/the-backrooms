@@ -1,4 +1,5 @@
 using Backrooms.Common.RNG;
+using Backrooms.Managers.World;
 using Backrooms.Scripts.World.Generation.Generators;
 using Backrooms.World.Generation;
 using Godot;

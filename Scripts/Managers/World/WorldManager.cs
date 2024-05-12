@@ -2,13 +2,13 @@ using Backrooms.Common.RNG;
 using Backrooms.World.Generation;
 using Godot;
 
-namespace Backrooms.Managers;
+namespace Backrooms.Managers.World;
 
 internal partial class WorldManager : Node {
     [Export]
     private ChunkManager _chunkManager;
 
-    public IChunkGenerator StartingChunkGenerator { 
+    public IChunkGenerator StartingChunkGenerator {
         private get {
             return default;
         }
@@ -28,7 +28,7 @@ internal partial class WorldManager : Node {
     private class RNGProvider : IRNGProvider {
         private RandomNumberGenerator rng;
 
-        public RNGProvider(ulong seed) {
+        public RNGProvider (ulong seed) {
             rng = new RandomNumberGenerator {
                 Seed = seed
             };

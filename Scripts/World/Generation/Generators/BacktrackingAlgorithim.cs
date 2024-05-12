@@ -3,8 +3,6 @@ using Backrooms.Common.RNG;
 using Backrooms.World;
 using Backrooms.World.Generation;
 using Godot;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Backrooms.Scripts.World.Generation.Generators;
 
@@ -13,8 +11,8 @@ public class BacktrackingAlgorithim : IChunkGenerator {
         var model = new ChunkModel (cords, dimensions);
         var visited = new List<VisitedRoom> ();
 
-        var sX = rng.Next (dimensions.IntX ()) - 1;
-        var sY = rng.Next (dimensions.IntY ()) - 1;
+        var sX = rng.Next (dimensions.IntX ());
+        var sY = rng.Next (dimensions.IntY ());
 
         var startVec = new Vector2 (sX, sY);
 
@@ -30,7 +28,7 @@ public class BacktrackingAlgorithim : IChunkGenerator {
 
         while (visited.Count < model.Count) {
             while (!current.UnvisitedNeighbors.Any ()) {
-                if(current.Previous is null) {
+                if (current.Previous is null) {
                     return model;
                 }
 
@@ -45,20 +43,20 @@ public class BacktrackingAlgorithim : IChunkGenerator {
 
             var next = BuildVisitedRoom (model, current, nextRoom);
 
-            next.UnvisitedNeighbors.RemoveAll (r => visited.Any(v => v.Room == r));
+            next.UnvisitedNeighbors.RemoveAll (r => visited.Any (v => v.Room == r));
 
             visited.Add (next);
 
-            var needsRemovel = visited.Where (visit => visit.UnvisitedNeighbors.Contains(nextRoom));
+            var needsRemovel = visited.Where (visit => visit.UnvisitedNeighbors.Contains (nextRoom));
 
             foreach (var v in needsRemovel) {
-                v.UnvisitedNeighbors.Remove(nextRoom);
+                v.UnvisitedNeighbors.Remove (nextRoom);
             }
 
             var nextCords = next.Room.Coordinates;
             var currentCords = current.Room.Coordinates;
 
-            var dir = currentCords.DirectionTo (nextCords).ToDirection();
+            var dir = currentCords.DirectionTo (nextCords).ToDirection ();
 
             current.Room.SetWall (dir, false);
 

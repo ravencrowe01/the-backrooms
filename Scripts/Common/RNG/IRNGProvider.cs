@@ -8,9 +8,9 @@ public interface IRNGProvider {
     void SetSeed (ulong seed);
 
     /// <summary>
-    /// Get the next integer in the RNG sequence between 0 and <em>max, inclusive.</em>
+    /// Get the next integer in the RNG sequence between 0 and max, exclusive.
     /// </summary>
-    /// <param name="max">The inclusive max value.</param>
+    /// <param name="max">The exclusive max value.</param>
     /// <returns></returns>
     int Next (int max);
 }

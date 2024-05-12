@@ -4,7 +4,7 @@ using Backrooms.World;
 using Backrooms.World.Generation;
 using Godot;
 
-namespace Backrooms.Managers;
+namespace Backrooms.Managers.World;
 
 internal partial class ChunkManager : Node {
     private Dictionary<Vector2, Chunk> _chunks = new Dictionary<Vector2, Chunk> ();

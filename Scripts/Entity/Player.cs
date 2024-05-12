@@ -2,26 +2,33 @@ using Godot;
 
 namespace Backrooms.Entity;
 
-public class Player : Node3D, IMoveableEntity {
-    public Vector3 NextDirection { get; set; } = new Vector3 (0, 0, 0);
+internal partial class Player : CharacterBody3D, IEntity {
+    public Vector3 NextDirection { get; set; } = new Vector3 (0f, 0f, 0f);
 
-    [Export]
-    private float _speed = 14;
+    public float BaseSpeed { private get; set; } = 14f;
 
-    [Export]
-    private float _fallSpeed = 75;
+    public float SpeedModifier { private get; set; } = 1f;
+
+    public float ModifiedSpeed => BaseSpeed * SpeedModifier;
+
+    public float BaseFallSpeed { private get; set; } = 75f;
+
+    public float FallSpeedModifier { private get; set; } = 1f;
+
+    public float ModifiedFallSpeed => BaseFallSpeed * FallSpeedModifier;
 
     public override void _PhysicsProcess (double delta) {
-        var _targetVelocity = NextDirection * _speed;
+        var _targetVelocity = NextDirection * BaseSpeed;
 
-        _targetVelocity.X *= _speed;
-        _targetVelocity.Y *= _speed;
+        _targetVelocity.X *= BaseSpeed;
+        _targetVelocity.Y *= BaseSpeed;
 
-        if(!IsOnFloor) {
-            _targetVelocity -= _fallSpeed * delta;
+        if (!IsOnFloor ()) {
+            _targetVelocity -= new Vector3 (0f, (float) (BaseFallSpeed * delta), 0f);
         }
 
-        _targetVelocity = _targetVelocity;
+        Velocity = _targetVelocity;
+
         MoveAndSlide ();
     }
 }
