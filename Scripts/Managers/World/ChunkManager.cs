@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using Backrooms.Common.RNG;
 using Backrooms.World;
 using Backrooms.World.Generation;
@@ -39,5 +38,5 @@ internal partial class ChunkManager : Node {
         _chunks.Add (cords, chunk);
     }
 
-    private Vector3 CalculateChunkOffset () => -new Vector3 ((_chunkDimensions.X / 2 * _roomDimensions.X) - (_roomDimensions.X / 2), 0, (_chunkDimensions.Y / 2* _roomDimensions.Y) - (_roomDimensions.Y / 2));
+    private Vector3 CalculateChunkOffset () => -new Vector3 ((_chunkDimensions.X / 2 * _roomDimensions.X) - (_roomDimensions.X / 2), 0, (_chunkDimensions.Y / 2 * _roomDimensions.Y) - (_roomDimensions.Y / 2));
 }

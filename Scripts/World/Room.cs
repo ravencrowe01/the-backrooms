@@ -1,8 +1,6 @@
 using Backrooms.Common;
 using Backrooms.World.Generation;
 using Godot;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Backrooms.World;
 
@@ -34,6 +32,7 @@ public partial class Room : Node3D {
 
     public void SetWalls (Dictionary<Direction, bool> walls) {
         foreach (var dir in walls.Keys) {
+            // West = 3, NorthEast = 4, etc
             if (dir <= Direction.West) {
                 FindWall (dir).SetState (walls [dir]);
             }
@@ -56,6 +55,7 @@ public partial class Room : Node3D {
 
     public void SetCorners (Dictionary<Direction, bool> corners) {
         foreach (var dir in corners.Keys) {
+            // West = 3, NorthEast = 4, etc
             if (dir > Direction.West) {
                 FindCorner (dir).SetState (corners [dir]);
             }

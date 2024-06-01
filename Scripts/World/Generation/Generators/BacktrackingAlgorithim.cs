@@ -1,6 +1,5 @@
 ﻿using Backrooms.Common;
 using Backrooms.Common.RNG;
-using Backrooms.World;
 using Backrooms.World.Generation;
 using Godot;
 
@@ -16,18 +15,14 @@ public class BacktrackingAlgorithim : IChunkGenerator {
 
         var startVec = new Vector2 (sX, sY);
 
-        var start = new VisitedRoom {
-            Room = model [startVec],
-            Previous = null,
-            UnvisitedNeighbors = model.FindNeighbors (startVec, NeighborSearchFlags.SameAxisOnly).ToList ()
-        };
+        var start = new VisitedRoom (model [startVec], null, model.FindRoomNeighbors (startVec).ToList ());
 
         visited.Add (start);
 
         var current = visited [0];
 
         while (visited.Count < model.Count) {
-            while (!current.UnvisitedNeighbors.Any ()) {
+            while (current.UnvisitedNeighbors.Count == 0) {
                 if (current.Previous is null) {
                     return model;
                 }
@@ -41,7 +36,7 @@ public class BacktrackingAlgorithim : IChunkGenerator {
 
             var nextRoom = current.UnvisitedNeighbors [roll];
 
-            var next = BuildVisitedRoom (model, current, nextRoom);
+            var next = new VisitedRoom (nextRoom, current, model.FindRoomNeighbors (nextRoom.Coordinates).ToList ());
 
             next.UnvisitedNeighbors.RemoveAll (r => visited.Any (v => v.Room == r));
 
@@ -68,19 +63,11 @@ public class BacktrackingAlgorithim : IChunkGenerator {
         return model;
     }
 
-    private static VisitedRoom BuildVisitedRoom (ChunkModel model, VisitedRoom current, RoomModel nextRoom) {
-        return new VisitedRoom {
-            Room = nextRoom,
-            Previous = current,
-            UnvisitedNeighbors = model.FindNeighbors (nextRoom.Coordinates, NeighborSearchFlags.SameAxisOnly).ToList ()
-        };
-    }
+    private class VisitedRoom (RoomModel room, BacktrackingAlgorithim.VisitedRoom previous, List<RoomModel> unvisitedNeighbors) {
+        public RoomModel Room { get; set; } = room;
 
-    private class VisitedRoom {
-        public RoomModel Room { get; set; }
+        public VisitedRoom Previous { get; set; } = previous;
 
-        public VisitedRoom Previous { get; set; }
-
-        public List<RoomModel> UnvisitedNeighbors { get; set; }
+        public List<RoomModel> UnvisitedNeighbors { get; set; } = unvisitedNeighbors;
     }
 }

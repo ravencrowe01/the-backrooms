@@ -7,8 +7,8 @@ internal partial class InputManager : Node {
     public bool ProcessCharacterInput { get; set; } = false;
 
     public override void _UnhandledKeyInput (InputEvent @event) {
-        if(ProcessCharacterInput) {
-            if(@event.IsAction(InputCodes.MoveForward)) {
+        if (ProcessCharacterInput) {
+            if (@event.IsAction (InputCodes.MoveForward)) {
 
             }
 

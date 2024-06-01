@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://davek0217gtrc"]
 
-[ext_resource type="Script" path="res://Scripts/Managers/WorldManager.cs" id="1_80q83"]
+[ext_resource type="Script" path="res://Scripts/Managers/World/WorldManager.cs" id="1_c35gr"]
 [ext_resource type="PackedScene" uid="uid://cukb42cfd16fl" path="res://Scenes/Managers/chunk_manager.tscn" id="2_rl4jj"]
 
-[node name="WorldManager" type="Node" node_paths=PackedStringArray("_chunkManager")]
-script = ExtResource("1_80q83")
-_chunkManager = NodePath("ChunkManager")
+[node name="WorldManager" type="Node"]
+script = ExtResource("1_c35gr")
 
 [node name="ChunkManager" parent="." instance=ExtResource("2_rl4jj")]

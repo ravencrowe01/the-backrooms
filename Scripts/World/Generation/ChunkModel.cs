@@ -1,5 +1,4 @@
 using Godot;
-using System.Collections.Generic;
 
 namespace Backrooms.World.Generation;
 
@@ -38,15 +37,16 @@ public class ChunkModel {
         }
     }
 
-    public IEnumerable<RoomModel> FindNeighbors (Vector2 of, NeighborSearchFlags flags) {
-        var neighbors = new List<RoomModel> ();
+    public IEnumerable<RoomModel> FilterRooms (Func<RoomModel, bool> filters) => _rooms.Values.Where (filters);
 
-        var cords = WorldUtility.FindNeighbors (of, Dimensions, flags: flags);
+    public IEnumerable<RoomModel> FindRoomNeighbors (Vector2 of, bool diagonal = false) => FilterRooms (room => {
+        var x = room.Coordinates.X - of.X;
+        var y = room.Coordinates.Y - of.Y;
 
-        foreach (var cord in cords) {
-            neighbors.Add (_rooms [cord]);
-        }
+        var dist = Mathf.Sqrt (x * x + y * y);
 
-        return neighbors;
-    }
+        var distMax = diagonal ? 1 : Mathf.Sqrt2;
+
+        return dist <= distMax;
+    });
 }

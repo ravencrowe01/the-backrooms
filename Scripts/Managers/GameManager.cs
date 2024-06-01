@@ -15,7 +15,7 @@ internal partial class GameManager : Node {
         _worldManager = _worldManagerBase.Instantiate<WorldManager> ();
         AddChild (_worldManager);
 
-        _worldManager.StartingChunkGenerator = new BacktrackingAlgorithim();
+        _worldManager.StartingChunkGenerator = new BacktrackingAlgorithim ();
         _worldManager.GenerateStartingChunks ();
     }
 
@@ -23,8 +23,8 @@ internal partial class GameManager : Node {
         public ChunkModel GenerateChunk (Vector2 cords, Vector2 dimensions, IRNGProvider rng) {
             var model = new ChunkModel (cords, dimensions);
 
-            for(int y = 0; y < dimensions.X; y++) {
-                for(int x = 0; x < dimensions.Y; x++) {
+            for (int y = 0; y < dimensions.X; y++) {
+                for (int x = 0; x < dimensions.Y; x++) {
                     var c = new Vector2 (y, x);
 
                     model [c] = new RoomModel (c) {

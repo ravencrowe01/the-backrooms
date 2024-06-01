@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Backrooms.Common;
+﻿namespace Backrooms.Common;
 
 public static class Utility {
     public static int ShiftRightWithWrap (int num, int bits) {

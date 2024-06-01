@@ -16,9 +16,9 @@ public partial class Chunk : Node3D {
         for (int y = 0; y < Rooms.GetLength (0); y++) {
             for (int x = 0; x < Rooms.GetLength (1); x++) {
                 var localPos = new Vector2 (y, x);
-                var worldPos = new Vector2 (ChunkPosition.X * Constants.ChunkWidth + y, ChunkPosition.Y * Constants.ChunkHeight + x);
+                //var worldPos = new Vector2 (ChunkPosition.X * Constants.ChunkWidth + y, ChunkPosition.Y * Constants.ChunkHeight + x);
 
-                var room = roomBase.Instantiate<Room>();
+                var room = roomBase.Instantiate<Room> ();
 
                 room.Coordinates = localPos;
                 room.Position = new Vector3 (x * Constants.RoomWidth, 0, y * Constants.RoomHeight);

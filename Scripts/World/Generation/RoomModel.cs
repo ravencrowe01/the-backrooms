@@ -3,8 +3,8 @@ using Godot;
 
 namespace Backrooms.World.Generation;
 
-public class RoomModel {
-    public Vector2 Coordinates { get; }
+public class RoomModel (Vector2 cords) {
+    public Vector2 Coordinates { get; } = cords;
 
     public bool NorthWall { get; set; } = true;
     public bool SouthWall { get; set; } = true;
@@ -15,10 +15,6 @@ public class RoomModel {
     public bool NorthWestCorner { get; set; }
     public bool SouthEastCorner { get; set; }
     public bool SouthWestCorner { get; set; }
-
-    public RoomModel (Vector2 cords) {
-        Coordinates = cords;
-    }
 
     public void SetWalls (bool north = false, bool south = false, bool east = false, bool west = false) {
         NorthWall = north;
@@ -49,7 +45,7 @@ public class RoomModel {
         }
     }
 
-    public void SetCorners (bool northEast, bool northWest, bool southEast, bool southWest) {
+    public void SetCorners (bool northEast = false, bool northWest = false, bool southEast = false, bool southWest = false) {
         NorthEastCorner = northEast;
         NorthWestCorner = northWest;
         SouthEastCorner = southEast;

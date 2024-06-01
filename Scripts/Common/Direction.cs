@@ -1,6 +1,4 @@
-﻿using Godot;
-
-namespace Backrooms.Common;
+﻿namespace Backrooms.Common;
 
 public enum Direction {
     North,
